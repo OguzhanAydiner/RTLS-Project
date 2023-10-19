@@ -2,11 +2,11 @@
 #define APP_H
 
 
-#include "Notation.h"
-#include "Memory.h"
+#include "notation.h"
+#include "memory.h"
+#include "swTimer.h"
 
 
-#endif
 
 typedef struct {
 	U32				timeStamp;
@@ -21,6 +21,19 @@ typedef struct {
 /*                          Functions                                          */
 
 void DataSentCallBack(const uint8_t *mac_addr, esp_now_send_status_t status);
-BOOL TimeStampHandler();
+BOOL MessageSendHandler(TimeStamp_t *dataPtr , MemoryConfig_t *memPtr);
 
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
 

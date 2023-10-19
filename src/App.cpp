@@ -1,26 +1,27 @@
-#include"App.h"
+#include "app.h"
 
 
 
-/*
-BOOL TimeStampHandler ( struct_message myData)
+
+BOOL MessageSendHandler ( TimeStamp_t *dataPtr , MemoryConfig_t *memPtr)
 {
-    BOOL retVal = TRUE;  
+  BOOL retVal = FALSE;
 
-    esp_err_t result = esp_now_send((uint8_t *)&g_devMemoryConfig.mac, (uint8_t *) &myData, sizeof(myData));
-   
+  esp_err_t result = esp_now_send((const uint8_t *)&(memPtr->mac) , (const uint8_t *)dataPtr, sizeof(TimeStamp_t));
+  
   if (result == ESP_OK) 
   {
-        Serial.println("Sent with success");
+      Serial.println("Sent with success");
+      retVal = TRUE;
   }
   else 
-  {
-        Serial.println("Error sending the data");
+  { 
+      Serial.println("Error sending the data");
+      retVal = FALSE;
   }
 
-    return retVal;
+  return retVal;
 }
-*/
 
 void DataSentCallBack(const uint8_t * mac_addr, esp_now_send_status_t status) 
 {
@@ -28,7 +29,11 @@ void DataSentCallBack(const uint8_t * mac_addr, esp_now_send_status_t status)
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
+U8    SwTimerTest ()
+{
 
+
+}
 
 
 
