@@ -12,6 +12,11 @@ typedef struct
 } MemoryConfig_t;
 
 
+extern MemoryConfig_t          g_devMemoryConfig;
+
+
+void MemoryInit();
+
 #endif
 
 
