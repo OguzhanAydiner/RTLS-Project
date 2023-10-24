@@ -1,25 +1,19 @@
 #include "app.h"
 
 
+TimeStamp_t             g_sendPacket;
+TimeStamp_t             g_receivedPacket;
 
-<<<<<<< HEAD
+volatile BOOL packetReceived = FALSE;
 
-BOOL MessageSendHandler ( TimeStamp_t *dataPtr , MemoryConfig_t *memPtr)
+BOOL MessageSendHandler ( TimeStamp_t *dataPtr , MemoryConfig_t  *memPtr , DevType_t device)
 {
   BOOL retVal = FALSE;
 
-=======
-
-BOOL MessageSendHandler ( TimeStamp_t *dataPtr , MemoryConfig_t *memPtr)
-{
-  BOOL retVal = FALSE;
-
->>>>>>> b01286fff3327c1fe786982caa1a68524f336445
-  esp_err_t result = esp_now_send((const uint8_t *)&(memPtr->mac) , (const uint8_t *)dataPtr, sizeof(TimeStamp_t));
+  esp_err_t result = esp_now_send((const uint8_t *)&memPtr[device].mac , (const uint8_t *)dataPtr, sizeof(TimeStamp_t));
   
   if (result == ESP_OK) 
   {
-<<<<<<< HEAD
       Serial.println("Sent with success");
       retVal = TRUE;
   }
@@ -27,23 +21,10 @@ BOOL MessageSendHandler ( TimeStamp_t *dataPtr , MemoryConfig_t *memPtr)
   { 
       Serial.println("Error sending the data");
       retVal = FALSE;
-=======
-        Serial.println("Sent with success");
-        retVal = TRUE;
-  }
-  else 
-  { 
-        Serial.println("Error sending the data");
-        retVal = FALSE;
->>>>>>> b01286fff3327c1fe786982caa1a68524f336445
   }
 
   return retVal;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> b01286fff3327c1fe786982caa1a68524f336445
 
 void DataSentCallBack(const uint8_t * mac_addr, esp_now_send_status_t status) 
 {
@@ -51,10 +32,16 @@ void DataSentCallBack(const uint8_t * mac_addr, esp_now_send_status_t status)
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
-U8    SwTimerTest ()
-{
-
-
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+  memcpy(&g_receivedPacket, incomingData, sizeof(g_receivedPacket));
+  Serial.print("Bytes received: ");
+  Serial.println(len);
+  Serial.print("TimeStamp: ");
+  Serial.println(g_receivedPacket.timeStamp);
+  Serial.print("Bool: ");
+  Serial.println(g_receivedPacket.retVal);
+  Serial.println();
+  packetReceived = TRUE;
 }
 
 

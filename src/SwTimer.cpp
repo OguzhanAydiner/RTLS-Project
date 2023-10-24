@@ -1,15 +1,14 @@
-<<<<<<< HEAD
 #include "swTimer.h"
 
 SwTimer TwrTimer;
 
-BOOL IsTimeout(SwTimer *timer,TickType_t *lastTime) {
+BOOL IsTimeout(SwTimer *timer) {
 
     const TickType_t currentTime = xTaskGetTickCount();
-    const TickType_t timeDifference = currentTime - (*lastTime);
+    const TickType_t timeDifference = currentTime - (timer->lastTime);
 
-    if (timeDifference >= pdMS_TO_TICKS(Time)) {
-        *lastTime = currentTime; // Update the last time
+    if (timeDifference >= pdMS_TO_TICKS(timer->timeout)) {
+        timer->lastTime = currentTime; // Update the last time
         return true;
     } 
     else {
@@ -24,6 +23,7 @@ void SwTimerKill(SwTimer *timer) {
 void SwTimerEnable(SwTimer *timer, TickType_t timeout) {
     timer->startTime  = xTaskGetTickCount();
     timer->timeout    = timeout;
+    timer->lastTime = timer->startTime;
     timer->enabled    = TRUE;
 }
 
@@ -33,26 +33,3 @@ void SwTimerEnable(SwTimer *timer, TickType_t timeout) {
 
 
 
-=======
-#include "SwTimer.h"
-
-
-
-/*
-void timerTask(void *pvParameters) {
-
-    while (1) {
-        vTaskDelay(MS_TO_TICKS(1));  // Increment timer every 1 ms
-        timer_ms++;
-    }
-}
-*/
-
-void TimerHandler()
-{
-
-
-
-
-}
->>>>>>> b01286fff3327c1fe786982caa1a68524f336445
