@@ -3,21 +3,17 @@
 
 #include "notation.h"
 
-
-
-typedef struct 
+typedef struct
 {
-    MacAddress_t        mac;
+    MacAddress_t mac;
 
 } MemoryConfig_t;
 
-
-extern MemoryConfig_t          g_devMemoryConfig[3];
+extern MemoryConfig_t g_devMemoryConfig[3];
+extern TimeStamp_t g_sendPacket;
+extern TimeStamp_t g_receivedPacket;
+extern BOOL ReceivedFlag;
 
 void MemoryInit();
 
 #endif
-
-
-
-

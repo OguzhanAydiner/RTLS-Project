@@ -3,14 +3,10 @@
 
 #include "notation.h"
 
-
-
-
-typedef struct 
+typedef struct
 {
-    DevType_t       DevType;
-    
-    
+    DevType_t DevType;
+
 } MessagingParams_t;
 
 #endif
@@ -21,8 +17,3 @@ typedef struct
     MacAddress_t    Mac;
 } DevInfo_t;
 */
-
-
-
-
-
