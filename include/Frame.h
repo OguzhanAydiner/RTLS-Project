@@ -1,13 +1,12 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include "notation.h"
+#include "Notation.h"
 
-typedef struct
-{
-    DevType_t DevType;
 
-} MessagingParams_t;
+
+
+
 
 #endif
 /*
@@ -17,3 +16,8 @@ typedef struct
     MacAddress_t    Mac;
 } DevInfo_t;
 */
+
+
+
+
+

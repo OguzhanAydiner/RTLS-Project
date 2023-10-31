@@ -4,7 +4,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <math.h>
+#include <esp_now.h>
+#include <WiFi.h>
+#include <NTPClient.h>
+#include "freertos/timers.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 #define U8 uint8_t
 #define U16 uint16_t
@@ -33,5 +38,25 @@ typedef struct
     U32 timeStamp;
     BOOL retVal;
 } TimeStamp_t;
+
+typedef struct
+{
+    MacAddress_t mac;
+
+} MemoryConfig_t;
+
+typedef struct
+{
+    DevType_t DevType;
+
+} MessagingParams_t;
+
+typedef struct
+{
+    TickType_t startTime;
+    TickType_t timeout;
+    TickType_t lastTime;
+    BOOL enabled;
+} SwTimer_t;
 
 #endif

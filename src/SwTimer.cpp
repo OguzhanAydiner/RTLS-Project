@@ -1,48 +1,28 @@
 #include "swTimer.h"
-#include "network.h"
 
-SwTimer g_twrTimer;
+SwTimer_t TwrTimer;
 
-BOOL IsTimeout(SwTimer *timer)
-{
+BOOL IsTimeout(SwTimer_t *timer) {
 
+    BOOL retVal = FALSE;
     const TickType_t currentTime = xTaskGetTickCount();
     const TickType_t timeDifference = currentTime - (timer->lastTime);
+    
+    if ( timer->enabled && timeDifference >= pdMS_TO_TICKS(timer->timeout)) {
+        timer->lastTime = currentTime;
+        retVal = TRUE;
+    }
 
-    if (timeDifference >= pdMS_TO_TICKS(timer->timeout))
-    {
-        timer->lastTime = currentTime; // Update the last time
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return retVal;
 }
 
-void SwTimerKill(SwTimer *timer)
-{
+void SwTimerKill(SwTimer_t *timer) {
     timer->enabled = FALSE;
 }
 
-void SwTimerEnable(SwTimer *timer, TickType_t timeout)
-{
-    timer->startTime = xTaskGetTickCount();
-    timer->timeout = timeout;
-    timer->lastTime = timer->startTime;
-    timer->enabled = TRUE;
-}
-
-
-
-void TimeSyncHandler()
-{
-    static unsigned long lastTimeSync = 0;
-    const long interval = 5000; // Interval for time sync (60 seconds)
-
-    if (millis() - lastTimeSync > interval)
-    {
-        lastTimeSync = millis();
-        SyncTime();
-    }
+void SwTimerEnable(SwTimer_t *timer, TickType_t timeout) {
+    timer->startTime  = xTaskGetTickCount();
+    timer->timeout    = timeout;
+    timer->lastTime   = timer->startTime;
+    timer->enabled    = TRUE;
 }

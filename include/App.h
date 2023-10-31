@@ -4,8 +4,7 @@
 #include "notation.h"
 #include "memory.h"
 #include "swTimer.h"
-#include "network.h"
-#include "esp_now.h"
+
 
 /*                          Functions                                          */
 
