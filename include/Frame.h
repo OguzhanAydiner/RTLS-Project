@@ -6,12 +6,7 @@
 
 
 
-typedef struct 
-{
-    DevType_t       DevType;
-    
-    
-} MessagingParams_t;
+
 
 #endif
 /*
