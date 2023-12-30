@@ -5,13 +5,17 @@
 #include "memory.h"
 #include "swTimer.h"
 
-
 /*                          Functions                                          */
 
-void DataSentCallBack(const uint8_t *mac_addr, esp_now_send_status_t status);
-BOOL MessageSendHandler(TimeStamp_t *dataPtr, MemoryConfig_t *memPtr, DevType_t device);
-void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len);
+BOOL MessageSendHandler(RssiPacket_t *dataPtr, DevType_t device);
 void Esp32NowInit();
-BOOL TwrHandler(DevType_t Device);
+//void RSSIHandler(void *pvParameters);
+double RssiBasedCalculation(int8_t rssi);
+void SentCB(const uint8_t *mac_addr, esp_now_send_status_t status);
+void ReceiveCB(const uint8_t *mac, const uint8_t *incomingData, int len);
+
+extern esp_now_peer_info_t peerInfo;
+extern RssiPacket_t g_sendPacket;
+extern RssiPacket_t g_receivedPacket;
 
 #endif

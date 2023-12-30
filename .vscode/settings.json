@@ -3,5 +3,6 @@
     "files.associations": {
         "esp_now.h": "c"
     },
-    "C_Cpp.default.compilerPath": "C:/Users/thepo/.platformio/packages/toolchain-xtensa-esp32@8.4.0+2021r2-patch5/bin/xtensa-esp32-elf-gcc.exe"
+    "C_Cpp.default.compilerPath": "C:/Users/thepo/.platformio/packages/toolchain-xtensa-esp32@8.4.0+2021r2-patch5/bin/xtensa-esp32-elf-gcc.exe",
+    "idf.flashType": "UART"
 }

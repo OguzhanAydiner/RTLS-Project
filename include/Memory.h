@@ -2,18 +2,10 @@
 #define MEMORY_H
 
 #include "notation.h"
-
-
+#define DEVICE_TYPE ANCHOR_DEVICE_TWO
 
 extern MemoryConfig_t g_devMemoryConfig[3];
-extern TimeStamp_t g_sendPacket;
-extern TimeStamp_t g_receivedPacket;
 
 void MemoryInit();
-
-
-
-
-
 
 #endif
